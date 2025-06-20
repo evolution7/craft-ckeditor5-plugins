@@ -8,7 +8,7 @@ class TooltipAsset extends BaseCkeditorPackageAsset
     public $sourcePath = '@evolution7/tooltip/web/assets/tooltip/dist';
 
     public $js = [
-        'browser/index.js',
+        'tooltip.js',
     ];
 
     public array $pluginNames = [

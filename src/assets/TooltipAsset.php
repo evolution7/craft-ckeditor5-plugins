@@ -5,7 +5,7 @@ use craft\ckeditor\web\assets\BaseCkeditorPackageAsset;
 
 class TooltipAsset extends BaseCkeditorPackageAsset
 {
-    public $sourcePath = '@evolution7/ckeditor5plugins/src/assets/plugins/ckeditor5-tooltip';
+    public $sourcePath = '@evolution7/ckeditor5plugins/assets/plugins/ckeditor5-tooltip';
 
     public $js = [
         'tooltip.js',

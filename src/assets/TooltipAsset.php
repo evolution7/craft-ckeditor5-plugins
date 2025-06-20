@@ -1,11 +1,11 @@
 <?php
-namespace evolution7\tooltip\assets;
+namespace evolution7\ckeditor5plugins\assets;
 
 use craft\ckeditor\web\assets\BaseCkeditorPackageAsset;
 
 class TooltipAsset extends BaseCkeditorPackageAsset
 {
-    public $sourcePath = '@evolution7/tooltip/web/assets/tooltip/dist';
+    public $sourcePath = '@evolution7/ckeditor5plugins/plugins/ckeditor5-tooltip/build';
 
     public $js = [
         'tooltip.js',

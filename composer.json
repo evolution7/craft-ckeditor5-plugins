@@ -1,7 +1,7 @@
 {
-    "name": "evolution7/craft-ckeditor5-tooltip",
-    "version": "0.0.1",
-    "description": "CKEditor 5 Tooltip plugin for Craft CMS",
+    "name": "evolution7/craft-ckeditor5-plugins",
+    "version": "0.0.2",
+    "description": "CKEditor 5 plugins collection for Craft CMS",
     "type": "craft-plugin",
     "require": {
         "craftcms/cms": "^5.0.0",
@@ -9,12 +9,12 @@
     },
     "autoload": {
         "psr-4": {
-            "evolution7\\tooltip\\": "src/"
+            "evolution7\\ckeditor5plugins\\": "src/"
         }
     },
     "extra": {
-        "name": "CKEditor Tooltip",
-        "handle": "craft-ckeditor5-tooltip",
-        "class": "evolution7\\tooltip\\Plugin"
+        "name": "CKEditor 5 Plugins",
+        "handle": "craft-ckeditor5-plugins",
+        "class": "evolution7\\ckeditor5plugins\\Plugin"
     }
 }

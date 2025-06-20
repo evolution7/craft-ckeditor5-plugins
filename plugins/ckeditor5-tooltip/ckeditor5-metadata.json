@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    {
+      "name": "Tooltip",
+      "className": "Tooltip",
+      "description": "Adds text to the editor.",
+      "path": "src/tooltip.ts",
+      "uiComponents": [
+        {
+          "name": "tooltip",
+          "type": "Button",
+          "iconPath": "theme/icons/ckeditor.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 <?php
-namespace evolution7\tooltip;
+namespace evolution7\ckeditor5plugins;
 
 use craft\base\Plugin as BasePlugin;
 use craft\ckeditor\Plugin as CkeditorPlugin;
-use evolution7\tooltip\assets\TooltipAsset;
+use evolution7\ckeditor5plugins\assets\TooltipAsset;
 
 class Plugin extends BasePlugin
 {

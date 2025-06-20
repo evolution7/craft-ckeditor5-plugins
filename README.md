@@ -1,15 +1,17 @@
-# CKEditor 5 Tooltip Plugin for Craft CMS
+# CKEditor 5 Plugins for Craft CMS
 
-A Craft CMS plugin that integrates the CKEditor 5 Tooltip widget into your Craft fields, allowing you to add interactive tooltips to your rich text content.
+A collection of CKEditor 5 plugins packaged as a Craft CMS plugin. This plugin provides a wrapper that makes it easy to add multiple CKEditor 5 plugins to your Craft CMS installation.
+
+## Included Plugins
+
+- **Tooltip Plugin** - Add interactive tooltips with info icons to your rich text content
 
 ## Features
 
-- **Interactive tooltip widgets** - Add tooltips with an info icon (ℹ) to your CKEditor content
-- **Markdown link support** - Supports markdown-style links: `[text](url)` → `<a href="url">text</a>`
-- **Keyboard-friendly navigation** - Full keyboard accessibility support
-- **Edit existing tooltips** - Click existing tooltip icons to edit their content
-- **Clean semantic HTML output** - Generates `<span class="tooltip" data-tooltip="content"><i class="tooltip-icon">ℹ</i></span>`
-- **Customizable styling** - Style tooltips to match your site's design
+- **Multiple CKEditor 5 plugins** - Easily add and manage multiple CKEditor 5 plugins
+- **DLL-compatible builds** - Uses optimized DLL builds for better performance
+- **Automatic registration** - Plugins are automatically registered with Craft's CKEditor integration
+- **Extensible architecture** - Easy to add new plugins to the collection
 
 ## Requirements
 
@@ -22,60 +24,132 @@ A Craft CMS plugin that integrates the CKEditor 5 Tooltip widget into your Craft
 
 1. Install via Composer:
    ```bash
-   composer require evolution7/craft-ckeditor5-tooltip
+   composer require evolution7/craft-ckeditor5-plugins
    ```
 
 2. Install the plugin in the Craft Control Panel under Settings → Plugins, or from the command line:
    ```bash
-   ./craft plugin/install craft-ckeditor5-tooltip
+   ./craft plugin/install craft-ckeditor5-plugins
    ```
 
 ## Usage
 
 1. Go to Settings → Fields in your Craft Control Panel
 2. Create or edit a CKEditor field
-3. The tooltip button will automatically appear in the CKEditor toolbar
-4. Click the tooltip button (ℹ) to add a tooltip to your content
-5. Enter your tooltip content in the dialog that appears
-6. Click existing tooltip icons to edit their content
+3. Add the desired plugin toolbar items to your CKEditor configuration:
+   - `tooltip` - For the tooltip plugin
 
-## Output
+The plugins will automatically be available in your CKEditor instances.
 
-The plugin generates clean semantic HTML output:
+## Available Plugins
+
+### Tooltip Plugin
+
+Add interactive tooltips with info icons to your content.
+
+**Toolbar item:** `tooltip`
+
+**Features:**
+- Interactive tooltip widgets with info icons (ℹ)
+- Markdown link support: `[text](url)` → `<a href="url">text</a>`
+- Keyboard accessibility support
+- Edit existing tooltips by clicking them
+- Clean semantic HTML output
+
+**Output:**
 ```html
-<span class="tooltip" data-tooltip="Your tooltip content here">
+<span class="e7-tooltip" data-tooltip="Your tooltip content">
     <i class="tooltip-icon">ℹ</i>
 </span>
 ```
 
-You can style the tooltip icons and implement tooltip display functionality using CSS and JavaScript in your frontend templates.
+## Development
 
-## Styling
+### Adding New Plugins
 
-The plugin includes basic CSS for the tooltip icons in the editor. For frontend tooltip display, you'll need to implement your own CSS and JavaScript to handle the `data-tooltip` attribute.
+To add a new CKEditor 5 plugin to this collection:
 
-Example CSS for basic tooltip display:
-```css
-.tooltip {
-    position: relative;
-    cursor: help;
-}
+1. **Generate the plugin structure** using the CKEditor 5 package generator:
+   ```bash
+   npx ckeditor5-package-generator@latest <packageName> --use-yarn --lang ts
+   ```
 
-.tooltip:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    white-space: nowrap;
-    z-index: 1000;
-}
+2. **Place the plugin** in the `plugins/` directory of this repository
+
+3. **Build the DLL version** of your plugin:
+   ```bash
+   cd plugins/<your-plugin>
+   yarn dll:build
+   ```
+
+4. **Create a Package Asset class** in `src/assets/` (e.g., `YourPluginAsset.php`):
+   ```php
+   <?php
+   namespace evolution7\ckeditor5plugins\assets;
+
+   use craft\ckeditor\web\assets\BaseCkeditorPackageAsset;
+
+   class YourPluginAsset extends BaseCkeditorPackageAsset
+   {
+       public $sourcePath = '@evolution7/ckeditor5plugins/plugins/<your-plugin>/build';
+
+       public $js = [
+           '<your-plugin>.js', // The DLL build file
+       ];
+
+       public array $pluginNames = [
+           'YourPluginClassName', // From ckeditor5-metadata.json
+       ];
+
+       public array $toolbarItems = [
+           'yourToolbarItem', // From ckeditor5-metadata.json
+       ];
+   }
+   ```
+
+5. **Register the asset** in `src/Plugin.php`:
+   ```php
+   use evolution7\ckeditor5plugins\assets\YourPluginAsset;
+
+   public function init(): void
+   {
+       parent::init();
+       
+       // ... existing registrations
+       CkeditorPlugin::registerCkeditorPackage(YourPluginAsset::class);
+   }
+   ```
+
+### Plugin Structure
+
+Each CKEditor 5 plugin should follow this structure:
 ```
+plugins/
+└── your-plugin-name/
+    ├── build/              # DLL-compatible build files
+    │   └── your-plugin.js
+    ├── dist/               # Standard build files
+    ├── src/                # TypeScript source
+    ├── ckeditor5-metadata.json
+    └── package.json
+```
+
+### Key Points for Development
+
+- **Use Yarn** for consistency across all plugins
+- **Build DLL versions** - The Craft plugin uses the `build/` directory files
+- **Each plugin needs its own Asset class** - This is required by Craft's CKEditor integration
+- **Follow CKEditor 5 standards** - Use the official package generator and follow CKEditor 5 development guidelines
+- **Update metadata** - Ensure `ckeditor5-metadata.json` contains correct plugin and toolbar item names
+
+### Development Workflow
+
+1. Generate a new plugin using the CKEditor 5 package generator
+2. Develop your plugin following CKEditor 5 guidelines
+3. Build the DLL version for Craft integration
+4. Create the corresponding Asset class
+5. Register the asset in the main Plugin class
+6. Test the integration in a Craft CMS environment
 
 ## License
 
@@ -83,4 +157,4 @@ MIT
 
 ## Support
 
-For bug reports and feature requests, please use the [GitHub issues](https://github.com/evolution7/craft-ckeditor5-tooltip/issues) page.
+For bug reports and feature requests, please use the [GitHub issues](https://github.com/evolution7/craft-ckeditor5-plugins/issues) page.

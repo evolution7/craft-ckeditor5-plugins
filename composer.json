@@ -1,5 +1,6 @@
 {
     "name": "evolution7/craft-ckeditor5-tooltip",
+    "version": "0.0.1",
     "description": "CKEditor 5 Tooltip plugin for Craft CMS",
     "type": "craft-plugin",
     "require": {

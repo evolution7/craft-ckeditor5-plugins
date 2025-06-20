@@ -16,5 +16,8 @@
         "name": "CKEditor 5 Plugins",
         "handle": "craft-ckeditor5-plugins",
         "class": "evolution7\\ckeditor5plugins\\Plugin"
+    },
+    "scripts": {
+        "build": "node scripts/copy-builds.js"
     }
 }

@@ -56,7 +56,7 @@ export default class Tooltip extends Plugin {
 
 				const tooltipView = viewWriter.createContainerElement( 'span', {
 					class: 'e7-tooltip ck-tooltip-widget',
-					'data-tooltip': tooltipContent
+					'title': tooltipContent
 				} );
 
 				// Add info icon
@@ -82,7 +82,7 @@ export default class Tooltip extends Plugin {
 
 				const tooltipView = viewWriter.createContainerElement( 'span', {
 					class: 'tooltip',
-					'data-tooltip': tooltipContent
+					'title': tooltipContent
 				} );
 
 				// Add info icon for the final HTML output too
@@ -107,7 +107,7 @@ export default class Tooltip extends Plugin {
 				classes: 'tooltip'
 			},
 			model: ( viewElement, { writer: modelWriter } ) => {
-				const tooltipContent = viewElement.getAttribute( 'data-tooltip' ) || '';
+				const tooltipContent = viewElement.getAttribute( 'title' ) || '';
 
 				return modelWriter.createElement( 'tooltip', {
 					tooltipContent

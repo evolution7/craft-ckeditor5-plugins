@@ -181,9 +181,10 @@ export default class Tooltip extends Plugin {
 		);
 
 		// Handle form submission
-		this._formView.on( 'submit', () => {
-			if ( this._formView!.isValid() ) {
-				const content = this._formView!.content;
+		const formView = this._formView;
+		formView.on( 'submit', () => {
+			if ( formView.isValid() ) {
+				const content = formView.content;
 				const htmlContent = this._convertMarkdownToHtml( content );
 
 				if ( isEdit ) {
@@ -200,7 +201,7 @@ export default class Tooltip extends Plugin {
 		} );
 
 		// Handle form cancellation
-		this._formView.on( 'cancel', () => {
+		formView.on( 'cancel', () => {
 			this._hideBalloon();
 		} );
 
@@ -208,12 +209,12 @@ export default class Tooltip extends Plugin {
 		const markdownContent = this._convertHtmlToMarkdown( existingContent );
 
 		// Set form content
-		this._formView.content = markdownContent;
-		this._formView.resetFormStatus();
+		formView.content = markdownContent;
+		formView.resetFormStatus();
 
 		// Show the balloon
 		this._balloon!.add( {
-			view: this._formView,
+			view: formView,
 			position: this._getBalloonPositionData()
 		} );
 
@@ -221,7 +222,7 @@ export default class Tooltip extends Plugin {
 		this._addClickOutsideHandler();
 
 		// Focus the form
-		this._formView.focus();
+		formView.focus();
 	}
 
 	private _hideBalloon(): void {

@@ -471,6 +471,10 @@ class TooltipFormView extends View {
 			class: 'ck-button-action ck-button-bold'
 		} );
 
+		button.on( 'execute', () => {
+			this.fire( 'submit' );
+		} );
+
 		return button;
 	}
 

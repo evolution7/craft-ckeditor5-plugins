@@ -74,6 +74,13 @@ export default class Tooltip extends Plugin {
 			}
 		} );
 
+		// Handle tooltipContent attribute changes for editing view
+		conversion.for( 'editingDowncast' ).attributeToAttribute( {
+			model: 'tooltipContent',
+			view: 'title',
+			converterPriority: 'low'
+		} );
+
 		// Data conversion (for HTML output)
 		conversion.for( 'dataDowncast' ).elementToElement( {
 			model: 'tooltip',
@@ -81,13 +88,13 @@ export default class Tooltip extends Plugin {
 				const tooltipContent = modelElement.getAttribute( 'tooltipContent' ) || '';
 
 				const tooltipView = viewWriter.createContainerElement( 'span', {
-					class: 'tooltip',
+					class: 'e7-tooltip',
 					'title': tooltipContent
 				} );
 
 				// Add info icon for the final HTML output too
 				const iconView = viewWriter.createUIElement( 'i', {
-					class: 'tooltip-icon'
+					class: 'e7-tooltip-icon'
 				}, function( domDocument ) {
 					const domElement = this.toDomElement( domDocument );
 					domElement.innerHTML = '&#8505;'; // Info icon
@@ -100,11 +107,18 @@ export default class Tooltip extends Plugin {
 			}
 		} );
 
+		// Handle tooltipContent attribute changes for data output
+		conversion.for( 'dataDowncast' ).attributeToAttribute( {
+			model: 'tooltipContent',
+			view: 'title',
+			converterPriority: 'low'
+		} );
+
 		// View to model conversion
 		conversion.for( 'upcast' ).elementToElement( {
 			view: {
 				name: 'span',
-				classes: 'tooltip'
+				classes: 'e7-tooltip'
 			},
 			model: ( viewElement, { writer: modelWriter } ) => {
 				const tooltipContent = viewElement.getAttribute( 'title' ) || '';

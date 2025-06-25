@@ -163,6 +163,11 @@ export default class Tooltip extends Plugin {
 					// Get the model element
 					const modelElement = editor.editing.mapper.toModelElement( viewElement as any );
 					if ( modelElement ) {
+						// Select the tooltip element first
+						editor.model.change( writer => {
+							writer.setSelection( modelElement, 'on' );
+						} );
+
 						const tooltipContent = modelElement.getAttribute( 'tooltipContent' ) as string || '';
 						this._showTooltipBalloon( tooltipContent, true );
 					}
@@ -339,12 +344,25 @@ class InsertTooltipCommand extends Command {
 
 class EditTooltipCommand extends Command {
 	public override execute( options: { content?: string } = {} ): void {
-		const plugin = this.editor.plugins.get( 'Tooltip' ) as Tooltip;
-		plugin._showTooltipBalloon( options.content || '', true );
+		const model = this.editor.model;
+		const selection = model.document.selection;
+
+		// Find the selected tooltip element
+		const tooltipElement = selection.getFirstPosition()!.parent;
+
+		if ( tooltipElement && tooltipElement.name === 'tooltip' ) {
+			model.change( writer => {
+				writer.setAttribute( 'tooltipContent', options.content || '', tooltipElement );
+			} );
+		}
 	}
 
 	public override refresh(): void {
-		this.isEnabled = true;
+		const model = this.editor.model;
+		const selection = model.document.selection;
+		const element = selection.getFirstPosition()?.parent;
+
+		this.isEnabled = element?.name === 'tooltip';
 	}
 }
 

@@ -373,11 +373,7 @@ class TooltipFormView extends View {
 		this.children = this.createCollection( [
 			this._createFormRow( [ this.contentInputView ], [ 'ck-form__row_large-top-padding' ] ),
 			this._createInstructionsView(),
-			this._createFormRow( [
-				this.saveButtonView, this.cancelButtonView
-			],
-			[ 'ck-form__row_with-submit', 'ck-form__row_large-top-padding' ]
-			)
+			this._createActionsRow( [ this.cancelButtonView, this.saveButtonView ] )
 		] );
 
 		// Set form template
@@ -502,6 +498,20 @@ class TooltipFormView extends View {
 		} );
 
 		return rowView;
+	}
+
+	private _createActionsRow( children: Array<any> ): View {
+		const actionsView = new View( this.locale );
+
+		actionsView.setTemplate( {
+			tag: 'div',
+			attributes: {
+				class: [ 'ck', 'ck-dialog__actions' ]
+			},
+			children
+		} );
+
+		return actionsView;
 	}
 
 	private _createInstructionsView(): View {

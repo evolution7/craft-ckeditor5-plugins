@@ -361,10 +361,22 @@ class EditTooltipCommand extends Command {
 		const model = this.editor.model;
 		const selection = model.document.selection;
 
-		// Find the selected tooltip element
-		const tooltipElement = selection.getFirstPosition()!.parent;
+		// Find the selected tooltip element - check both selected element and parent
+		let tooltipElement: any = null;
 
-		if ( tooltipElement && tooltipElement.name === 'tooltip' ) {
+		// First check if we have a direct selection on the tooltip
+		const selectedElement = selection.getSelectedElement();
+		if ( selectedElement && selectedElement.name === 'tooltip' ) {
+			tooltipElement = selectedElement;
+		} else {
+			// Fallback to checking parent
+			const parent = selection.getFirstPosition()?.parent;
+			if ( parent && parent.name === 'tooltip' ) {
+				tooltipElement = parent;
+			}
+		}
+
+		if ( tooltipElement ) {
 			model.change( writer => {
 				writer.setAttribute( 'tooltipContent', options.content || '', tooltipElement );
 			} );
@@ -374,9 +386,12 @@ class EditTooltipCommand extends Command {
 	public override refresh(): void {
 		const model = this.editor.model;
 		const selection = model.document.selection;
-		const element = selection.getFirstPosition()?.parent;
 
-		this.isEnabled = element?.name === 'tooltip';
+		// Check both selected element and parent
+		const selectedElement = selection.getSelectedElement();
+		const parentElement = selection.getFirstPosition()?.parent;
+
+		this.isEnabled = ( selectedElement?.name === 'tooltip' ) || ( parentElement?.name === 'tooltip' );
 	}
 }
 

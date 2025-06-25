@@ -40,4 +40,9 @@
 /* Balloon-specific styling */
 .ck-balloon-panel .ck-tooltip-form {
 	width: 300px;
+	padding: 0;
+}
+
+.ck-tooltip-form .ck-dialog__actions {
+	padding: 8px 0;
 }

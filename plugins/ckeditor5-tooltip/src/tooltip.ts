@@ -74,9 +74,12 @@ export default class Tooltip extends Plugin {
 			}
 		} );
 
-		// Handle tooltipContent attribute changes
+		// Handle tooltipContent attribute changes specifically for tooltip elements
 		conversion.for( 'editingDowncast' ).attributeToAttribute( {
-			model: 'tooltipContent',
+			model: {
+				name: 'tooltip',
+				key: 'tooltipContent'
+			},
 			view: 'data-tooltip'
 		} );
 
@@ -106,9 +109,12 @@ export default class Tooltip extends Plugin {
 			}
 		} );
 
-		// Handle tooltipContent attribute changes for data output
+		// Handle tooltipContent attribute changes for data output specifically for tooltip elements
 		conversion.for( 'dataDowncast' ).attributeToAttribute( {
-			model: 'tooltipContent',
+			model: {
+				name: 'tooltip',
+				key: 'tooltipContent'
+			},
 			view: 'data-tooltip'
 		} );
 

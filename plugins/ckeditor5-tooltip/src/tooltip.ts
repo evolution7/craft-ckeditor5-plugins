@@ -6,7 +6,6 @@ import {
 	View,
 	LabeledFieldView,
 	createLabeledTextarea,
-	FormRowView,
 	submitHandler,
 	CssTransitionDisablerMixin
 } from 'ckeditor5/src/ui.js';
@@ -372,15 +371,13 @@ class TooltipFormView extends View {
 
 		// Create children collection
 		this.children = this.createCollection( [
-			new FormRowView( locale, {
-				children: [ this.contentInputView ],
-				class: [ 'ck-form__row_large-top-padding' ]
-			} ),
+			this._createFormRow( [ this.contentInputView ], [ 'ck-form__row_large-top-padding' ] ),
 			this._createInstructionsView(),
-			new FormRowView( locale, {
-				children: [ this.saveButtonView, this.cancelButtonView ],
-				class: [ 'ck-form__row_with-submit', 'ck-form__row_large-top-padding' ]
-			} )
+			this._createFormRow( [
+				this.saveButtonView, this.cancelButtonView
+			],
+			[ 'ck-form__row_with-submit', 'ck-form__row_large-top-padding' ]
+			)
 		] );
 
 		// Set form template
@@ -491,6 +488,20 @@ class TooltipFormView extends View {
 
 		button.delegate( 'execute' ).to( this, 'cancel' );
 		return button;
+	}
+
+	private _createFormRow( children: Array<any>, classNames: Array<string> ): View {
+		const rowView = new View( this.locale );
+
+		rowView.setTemplate( {
+			tag: 'div',
+			attributes: {
+				class: [ 'ck', 'ck-form__row', ...classNames ]
+			},
+			children
+		} );
+
+		return rowView;
 	}
 
 	private _createInstructionsView(): View {

@@ -89,7 +89,8 @@ export default class Tooltip extends Plugin {
 
 				const tooltipView = viewWriter.createContainerElement( 'span', {
 					class: 'e7-tooltip',
-					'title': tooltipContent
+					'title': tooltipContent,
+					'x-data': 'tooltip'
 				} );
 
 				// Add info icon for the final HTML output too

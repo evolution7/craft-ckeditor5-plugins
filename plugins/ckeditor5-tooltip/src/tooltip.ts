@@ -74,6 +74,12 @@ export default class Tooltip extends Plugin {
 			}
 		} );
 
+		// Handle tooltipContent attribute changes
+		conversion.for( 'editingDowncast' ).attributeToAttribute( {
+			model: 'tooltipContent',
+			view: 'data-tooltip'
+		} );
+
 		// Data conversion (for HTML output)
 		conversion.for( 'dataDowncast' ).elementToElement( {
 			model: 'tooltip',
@@ -98,6 +104,12 @@ export default class Tooltip extends Plugin {
 
 				return tooltipView;
 			}
+		} );
+
+		// Handle tooltipContent attribute changes for data output
+		conversion.for( 'dataDowncast' ).attributeToAttribute( {
+			model: 'tooltipContent',
+			view: 'data-tooltip'
 		} );
 
 		// View to model conversion

@@ -51,7 +51,6 @@ Add interactive tooltips with info icons to your content.
 
 **Features:**
 - Interactive tooltip widgets with info icons (ℹ)
-- Markdown link support: `[text](url)` → `<a href="url">text</a>`
 - Keyboard accessibility support
 - Edit existing tooltips by clicking them
 - Clean semantic HTML output

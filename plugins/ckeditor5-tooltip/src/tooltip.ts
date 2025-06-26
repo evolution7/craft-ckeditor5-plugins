@@ -205,15 +205,14 @@ export default class Tooltip extends Plugin {
 		formView.on( 'submit', () => {
 			if ( formView.isValid() ) {
 				const content = formView.content;
-				const htmlContent = this._convertMarkdownToHtml( content );
 
 				if ( isEdit ) {
 					editor.execute( 'editTooltip', {
-						content: htmlContent
+						content
 					} );
 				} else {
 					editor.execute( 'insertTooltip', {
-						content: htmlContent
+						content
 					} );
 				}
 				this._hideBalloon();
@@ -225,11 +224,8 @@ export default class Tooltip extends Plugin {
 			this._hideBalloon();
 		} );
 
-		// Convert HTML back to markdown for editing
-		const markdownContent = this._convertHtmlToMarkdown( existingContent );
-
 		// Set form content
-		formView.content = markdownContent;
+		formView.content = existingContent;
 		formView.resetFormStatus();
 
 		// Show the balloon
@@ -308,16 +304,6 @@ export default class Tooltip extends Plugin {
 			document.removeEventListener( 'click', this._clickOutsideHandler, true );
 			this._clickOutsideHandler = undefined;
 		}
-	}
-
-	private _convertMarkdownToHtml( markdown: string ): string {
-		// Simple markdown to HTML conversion for links: [text](url) -> <a href="url">text</a>
-		return markdown.replace( /\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>' );
-	}
-
-	private _convertHtmlToMarkdown( html: string ): string {
-		// Simple HTML to markdown conversion for links: <a href="url">text</a> -> [text](url)
-		return html.replace( /<a href="([^"]+)">([^<]+)<\/a>/g, '[$2]($1)' );
 	}
 
 	private _getFormValidators() {
@@ -568,26 +554,15 @@ class TooltipFormView extends View {
 	}
 
 	private _createInstructionsView(): View {
-		const t = this.locale?.t || ( ( key: string ) => key );
 		const instructionsView = new View( this.locale );
 
 		instructionsView.setTemplate( {
 			tag: 'div',
 			attributes: {
 				class: [ 'ck', 'ck-tooltip-instructions' ],
-				style: 'margin: 10px 0 0 0; padding: 8px; background: #f8f9fa; border-radius: 4px; font-size: 12px; color: #666;'
+				style: 'display: none;' // Hide the instructions completely
 			},
-			children: [
-				{
-					text: t( 'You can use markdown-style links:' )
-				},
-				{
-					tag: 'br'
-				},
-				{
-					text: t( '[link text](https://example.com)' )
-				}
-			]
+			children: []
 		} );
 
 		return instructionsView;

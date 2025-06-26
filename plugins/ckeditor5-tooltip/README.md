@@ -9,7 +9,6 @@ This plugin is included in the Evolution7 CKEditor 5 Plugins Craft plugin and is
 ## Features
 
 - 🎯 **Interactive Tooltips**: Insert tooltip widgets with clickable info icons
-- 📝 **Markdown Support**: Basic markdown-to-HTML conversion for links `[text](url)`
 - ✨ **Clean Output**: Semantic HTML with `data-tooltip` attributes
 - 🎨 **Customizable**: Easy to style with CSS
 - ⌨️ **Keyboard Friendly**: Full keyboard navigation support
@@ -38,7 +37,6 @@ This plugin is automatically loaded when you install the Evolution7 CKEditor 5 P
 
 1. **Insert New Tooltip**: Click the tooltip button (ℹ) in the toolbar
 2. **Edit Content**: A form appears with a textarea for content input
-3. **Markdown Links**: Use `[link text](https://example.com)` format for links
 4. **Save**: Click "Save" or press Enter to insert the tooltip
 5. **Cancel**: Click "Cancel" or press Escape to dismiss
 
@@ -48,14 +46,6 @@ This plugin is automatically loaded when you install the Evolution7 CKEditor 5 P
 2. **Edit Content**: The editing form opens with current content
 3. **Update**: Make changes and click "Save"
 
-### Markdown Support
-
-The plugin supports basic markdown-to-HTML conversion:
-
-```
-Input:  Check out [our documentation](https://example.com) for more info
-Output: Check out <a href="https://example.com">our documentation</a> for more info
-```
 
 ## HTML Output
 
@@ -67,12 +57,6 @@ When you save your content, tooltips are converted to clean, semantic HTML:
 </span>
 ```
 
-**With markdown links:**
-```html
-<span class="e7-tooltip" data-tooltip="Visit &lt;a href=&quot;https://example.com&quot;&gt;our site&lt;/a&gt; for details">
-    <i class="tooltip-icon">ℹ</i>
-</span>
-```
 
 ## Styling
 

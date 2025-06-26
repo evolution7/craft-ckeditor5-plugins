@@ -1,6 +1,6 @@
 {
   "name": "@evolution7/ckeditor5-tooltip",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A plugin for CKEditor 5.",
   "keywords": [
     "ckeditor",

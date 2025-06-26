@@ -1,6 +1,6 @@
 {
     "name": "evolution7/craft-ckeditor5-plugins",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "CKEditor 5 plugins collection for Craft CMS",
     "type": "craft-plugin",
     "require": {

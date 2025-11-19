@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    {
+      "name": "Fullscreen",
+      "className": "Fullscreen",
+      "description": "Opens the editor in the fullscreen mode to allow for more comfortable content editing.",
+      "path": "src/fullscreen.ts",
+      "uiComponents": [
+        {
+          "name": "fullscreen",
+          "type": "Button",
+          "iconPath": "@ckeditor/ckeditor5-icons/theme/icons/fullscreen-enter.svg"
+        }
+      ]
+    }
+  ]
+}

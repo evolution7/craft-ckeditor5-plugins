@@ -14,7 +14,7 @@ class Plugin extends BasePlugin
     {
         parent::init();
 
-        CkeditorPlugin::registerCkeditorPackage(TooltipAsset::class);
-        CkeditorPlugin::registerCkeditorPackage(FullscreenAsset::class);
+        CkeditorPlugin::registerCkeditorPackage(TooltipAsset::class, 'index.js');
+        CkeditorPlugin::registerCkeditorPackage(FullscreenAsset::class, 'index.js');
     }
 }

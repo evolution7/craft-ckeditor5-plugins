@@ -1,5 +1,6 @@
-import { Plugin, Command } from 'ckeditor5/src/core.js';
 import {
+	Plugin,
+	Command,
 	ButtonView,
 	ContextualBalloon,
 	BalloonPanelView,
@@ -7,10 +8,12 @@ import {
 	LabeledFieldView,
 	createLabeledTextarea,
 	submitHandler,
-	CssTransitionDisablerMixin
-} from 'ckeditor5/src/ui.js';
-import { Widget, toWidget } from 'ckeditor5/src/widget.js';
-import { FocusTracker, KeystrokeHandler } from 'ckeditor5/src/utils.js';
+	CssTransitionDisablerMixin,
+	Widget,
+	toWidget,
+	FocusTracker,
+	KeystrokeHandler
+} from 'ckeditor5';
 
 import '../theme/tooltip.css';
 

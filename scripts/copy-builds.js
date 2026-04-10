@@ -19,11 +19,11 @@ const pluginDirs = fs.readdirSync(pluginsDir, { withFileTypes: true })
 console.log(`Found ${pluginDirs.length} plugins: ${pluginDirs.join(', ')}`);
 
 pluginDirs.forEach(pluginName => {
-    const pluginBuildDir = path.join(pluginsDir, pluginName, 'build');
+    const pluginDistDir = path.join(pluginsDir, pluginName, 'dist');
     const targetDir = path.join(assetsDir, pluginName);
-    
-    if (!fs.existsSync(pluginBuildDir)) {
-        console.warn(`Warning: No build directory found for ${pluginName}`);
+
+    if (!fs.existsSync(pluginDistDir)) {
+        console.warn(`Warning: No dist directory found for ${pluginName}`);
         return;
     }
     
@@ -33,8 +33,8 @@ pluginDirs.forEach(pluginName => {
     }
     
     // Copy build directory to assets
-    copyDirectory(pluginBuildDir, targetDir);
-    console.log(`Copied ${pluginName} build files to src/assets/plugins/${pluginName}`);
+    copyDirectory(pluginDistDir, targetDir);
+    console.log(`Copied ${pluginName} dist files to src/assets/plugins/${pluginName}`);
 });
 
 function copyDirectory(src, dest) {

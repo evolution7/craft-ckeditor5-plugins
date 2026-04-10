@@ -10,7 +10,7 @@ class FullscreenAsset extends BaseCkeditorPackageAsset
     public string $namespace = '@evolution7/ckeditor5-fullscreen';
 
     public $js = [
-        ['index.js', 'type' => 'module'],
+        ['browser/index.js', 'type' => 'module'],
     ];
 
     public array $pluginNames = [
